@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playback: Audio Clip</title>
+</head>
+<body>
+  <h2>Audio Evidence (Trimmed)</h2>
+  <audio id="audioPlayer" controls>
+    <source src="recording.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <script>
+    const audio = document.getElementById("audioPlayer");
+
+    // ⏱️ Change these times in seconds
+    const startTime = 83;  // 1:23
+    const stopTime = 137;  // 2:17
+
+    audio.addEventListener('loadedmetadata', () => {
+      audio.currentTime = startTime;
+    });
+
+    audio.addEventListener('play', () => {
+      const stopInterval = setInterval(() => {
+        if (audio.currentTime >= stopTime) {
+          audio.pause();
+          clearInterval(stopInterval);
+        }
+      }, 300);
+    });
+  </script>
+</body>
+</html>
